@@ -72,15 +72,17 @@ object Lesson2 extends App {
   case object Thursday extends DayOfTheWeek
   case object Friday extends DayOfTheWeek
 
-  val aDay : DayOfTheWeek = "Monday"
+  val aDay : String = "Monday" // Unsafe, could put anything in there
+  val theDay: DayOfTheWeek = Monday // The Scala way
 
   def nextDay(day: DayOfTheWeek) : DayOfTheWeek  = {
     day match {
       case Monday => Tuesday
-      case Monday => Wednesday
+      case Monday => Wednesday // Unreachable code - compiler warning
       case Tuesday => Wednesday
       case Wednesday => Thursday
       case Thursday => Friday
+      // Missing Friday case - compiler non-exhaustiveness warning
     }
 
   }
