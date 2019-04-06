@@ -33,8 +33,17 @@ Example : A day of the week **is** a `Monday` *or* a `Tuesday` *or* a `Wednesday
 
 ```scala
 sealed trait Day
-final case object Monday extends Day
-final case object Tuesday extends Day
+case object Monday extends Day
+case object Tuesday extends Day
+.
+.
+.
+```
+
+To instantiate values of type `Day` simply refer to the object directly: 
+
+```scala 
+val monday : day = Monday
 ```
 
 - Note: `sealed` denotes that the type can not be extended outside of the file. This allows the compiler to give us certain guarantees when `pattern matching` (see below)
@@ -47,6 +56,12 @@ Example: A student **has** a name, **and** an age **and** a grade.
 ```scala
 final case class Student(name: String, age: Int, grade: Int)
 ```
+Instantiate case classes like you would regular classes, but without the `new` keyword
+
+```scala
+val me : Student = Student("Gabriel", 25, 2)
+```
+
 
 - Note: (If you're familiar with Java classes) Case classes *are* classes, but with slightly different behaviours. Importantly, equality checks will look at *structural equality* (i.e equality of all its fields) rather than *reference equality* - as regular classes. Don't worry if you don't know what that means.
 
@@ -98,7 +113,7 @@ Notes
 
 ```scala
 
-trait Card
+sealed trait Card
 
 final case class RegularCard(suit: Suit, rank: Rank) extends Card
 case object Joker extends Card
@@ -139,11 +154,12 @@ Some FP-related terminology. Useful to know because
  
 
 - `Algebraic Data Type` : Data modelled using logical ands and ors
-- `Sum Type`: Another way of referring to 'And' types (Intuitive reason: The number of possible values of a `sealed trait` is the **sum** of the number of possible values of the types that extend it )
-- `Product Type`: Another way of referring to 'Or' types (Intuitive reason: The number of possible values of a `case class` is the **product** of the number of possible values of the types of its members)
+- `Sum Type`: Another way of referring to `And` types (Intuitive reason: The number of possible values of a `sealed trait` is the **sum** of the number of possible values of the types that extend it )
+- `Product Type`: Another way of referring to `Or` types (Intuitive reason: The number of possible values of a `case class` is the **product** of the number of possible values of the types of its members)
 - `Pure` / `Referentially transparent`: A function or a piece of code is said to be pure or referentially transparent if executing it doesn't change the state of the outside world.
 - `Impure` / `Side-effectful`: The counterpart to pure code. Executing an impure function will change some state of the world. Performing any kind of I/O falls in this category
-## For next timeSide:
+
+## For next time:
 
 - Make sure you understand everything in this lesson.
 - Read chapters 3,4 from Essential Scala
